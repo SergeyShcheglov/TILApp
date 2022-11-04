@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "TILApp",
     platforms: [
-        .macOS(.v10_15)
+        .macOS(.v12)
     ],
     dependencies: [
         .package(
@@ -15,17 +15,19 @@ let package = Package(
             from: "4.0.0"),
         // 1
         .package(
-            url: "https://github.com/vapor/fluent-sqlite-driver.git",
+            
+            url: "https://github.com/vapor/fluent-mysql-driver.git",
             from: "4.0.0")
-    ], targets: [
+    ],
+    targets: [
         .target(
             name: "App",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 // 2
                 .product(
-                    name: "FluentSQLiteDriver",
-                    package: "fluent-sqlite-driver"),
+                    name: "FluentMySQLDriver",
+                    package: "fluent-mysql-driver"),
                 .product(name: "Vapor", package: "vapor")
             ],
             swiftSettings: [
@@ -38,4 +40,5 @@ let package = Package(
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
         ])
-    ] )
+    ]
+)

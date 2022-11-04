@@ -46,12 +46,12 @@
       }
     },
     {
-      "identity" : "fluent-sqlite-driver",
+      "identity" : "fluent-mysql-driver",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/fluent-sqlite-driver.git",
+      "location" : "https://github.com/vapor/fluent-mysql-driver.git",
       "state" : {
-        "revision" : "9439661820e547abc1807121cb3d3482447239a5",
-        "version" : "4.2.0"
+        "revision" : "549eb759bf1067f461f73f52ae8dcc467ca151be",
+        "version" : "4.1.0"
       }
     },
     {
@@ -61,6 +61,24 @@
       "state" : {
         "revision" : "0d55c35e788451ee27222783c7d363cb88092fab",
         "version" : "4.5.2"
+      }
+    },
+    {
+      "identity" : "mysql-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/mysql-kit.git",
+      "state" : {
+        "revision" : "7d7e6e362d9147fceb13b3f5415772f7fb97de17",
+        "version" : "4.5.3"
+      }
+    },
+    {
+      "identity" : "mysql-nio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/mysql-nio.git",
+      "state" : {
+        "revision" : "f0e8ad7e18e870e8665311d70bf3f01dcd6024a8",
+        "version" : "1.4.0"
       }
     },
     {
@@ -79,24 +97,6 @@
       "state" : {
         "revision" : "3c5413a229bc2abc962dab17ea66d25e448ad344",
         "version" : "3.21.0"
-      }
-    },
-    {
-      "identity" : "sqlite-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/sqlite-kit.git",
-      "state" : {
-        "revision" : "0b3b12b032991de3ab5999b428a652ec29139746",
-        "version" : "4.1.0"
-      }
-    },
-    {
-      "identity" : "sqlite-nio",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/sqlite-nio.git",
-      "state" : {
-        "revision" : "6481dd0b01112d082dd7eb362782126e81964138",
-        "version" : "1.1.0"
       }
     },
     {
