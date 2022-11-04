@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "bson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpenKitten/BSON.git",
+      "state" : {
+        "revision" : "40956d97c36aa166b8baea5add897864e1568a78",
+        "version" : "7.0.29"
+      }
+    },
+    {
       "identity" : "console-kit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/console-kit.git",
@@ -46,12 +55,21 @@
       }
     },
     {
-      "identity" : "fluent-mysql-driver",
+      "identity" : "fluent-mongo-driver",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/fluent-mysql-driver.git",
+      "location" : "https://github.com/vapor/fluent-mongo-driver.git",
       "state" : {
-        "revision" : "549eb759bf1067f461f73f52ae8dcc467ca151be",
-        "version" : "4.1.0"
+        "revision" : "e96cf416e4a224cf9f104c930abaa8b69fb4d8cd",
+        "version" : "1.1.2"
+      }
+    },
+    {
+      "identity" : "mongokitten",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OpenKitten/MongoKitten.git",
+      "state" : {
+        "revision" : "f2d245e50143e9d940566dd2d20914c040f34b9f",
+        "version" : "6.7.6"
       }
     },
     {
@@ -64,21 +82,12 @@
       }
     },
     {
-      "identity" : "mysql-kit",
+      "identity" : "niodns",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/mysql-kit.git",
+      "location" : "https://github.com/OpenKitten/NioDNS.git",
       "state" : {
-        "revision" : "7d7e6e362d9147fceb13b3f5415772f7fb97de17",
-        "version" : "4.5.3"
-      }
-    },
-    {
-      "identity" : "mysql-nio",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/mysql-nio.git",
-      "state" : {
-        "revision" : "f0e8ad7e18e870e8665311d70bf3f01dcd6024a8",
-        "version" : "1.4.0"
+        "revision" : "5d1c701127f1d399cfb27c38aeb40bfde40df004",
+        "version" : "2.1.1"
       }
     },
     {
