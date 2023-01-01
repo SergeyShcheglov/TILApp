@@ -27,7 +27,11 @@ struct AcronymsController: RouteCollection {
     }
     
     func createHandler(_ req: Request) throws -> EventLoopFuture<Acronym> {
-        let acronym = try req.content.decode(Acronym.self)
+        let data = try req.content.decode(CreateAcronymData.self)
+        let acronym = Acronym(
+            short: data.short, long: data.long, userID: data.userID
+        )
+        
         return acronym.save(on: req.db).map { acronym }
     }
     
@@ -37,14 +41,14 @@ struct AcronymsController: RouteCollection {
     }
     
     func updateHandler(_ req: Request) throws -> EventLoopFuture<Acronym> {
-        let updatedAcronym = try req.content.decode(Acronym.self)
-        return Acronym.find(
-            req.parameters.get("acronymID"),
-            on: req.db
-        )
-        .unwrap(or: Abort(.notFound)).flatMap { acronym in
-            acronym.short = updatedAcronym.short
-            acronym.long = updatedAcronym.long
+        let updatedData = try req.content.decode(CreateAcronymData.self)
+        
+        return Acronym
+            .find(req.parameters.get("acronymID"), on: req.db)
+            .unwrap(or: Abort(.notFound)).flatMap { acronym in
+            acronym.short = updatedData.short
+            acronym.long = updatedData.long
+            acronym.$user.id = updatedData.userID
             return acronym.save(on: req.db).map { acronym }
         }
     }
@@ -76,5 +80,11 @@ struct AcronymsController: RouteCollection {
     func sortHandler(_ req: Request) -> EventLoopFuture<[Acronym]> {
         return Acronym.query(on: req.db).sort(\.$short, .ascending).all()
     }
+}
+
+struct CreateAcronymData: Content {
+    let short: String
+    let long: String
+    let userID: UUID
 }
 
