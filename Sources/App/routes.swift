@@ -56,4 +56,16 @@ func routes(_ app: Application) throws {
             or.filter(\.$long == searchTerm)
         }.all()
     }
+    
+    app.get("api", "acronyms", "first") { req -> EventLoopFuture<Acronym> in
+        return Acronym.query(on: req.db)
+            .first()
+            .unwrap(or: Abort(.badRequest))
+    }
+    
+    app.get("api", "acronyms", "sorted") { req -> EventLoopFuture<[Acronym]> in
+        return Acronym.query(on: req.db)
+            .sort(\.$short, .ascending)
+            .all()
+    }
 }
