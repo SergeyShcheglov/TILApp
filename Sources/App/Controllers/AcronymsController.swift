@@ -20,6 +20,7 @@ struct AcronymsController: RouteCollection {
         acronymsRoutes.get("search", use: searchHandler)
         acronymsRoutes.get("first", use: getFirstHandler)
         acronymsRoutes.get("sort", use: sortHandler)
+        acronymsRoutes.get(":acronymID", "user", use: getUserHandler)
     }
     
     func getAllHandler(_ req: Request) -> EventLoopFuture<[Acronym]> {
@@ -79,6 +80,14 @@ struct AcronymsController: RouteCollection {
     
     func sortHandler(_ req: Request) -> EventLoopFuture<[Acronym]> {
         return Acronym.query(on: req.db).sort(\.$short, .ascending).all()
+    }
+    
+    func getUserHandler(_ req: Request) -> EventLoopFuture<User> {
+        Acronym.find(req.parameters.get("acronymID"), on: req.db)
+            .unwrap(or: Abort(.notFound))
+            .flatMap { acronym in
+                acronym.$user.get(on: req.db)
+            }
     }
 }
 
