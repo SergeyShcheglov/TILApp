@@ -27,6 +27,6 @@ final class User: Model, Content {
     
     init(id: UUID? = nil, name: String, username: String) {
         self.name = name
-        self.username = name
+        self.username = username
     }
 }
