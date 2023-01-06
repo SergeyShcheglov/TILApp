@@ -5,9 +5,13 @@ import Leaf
 
 // configures your application
 public func configure(_ app: Application) throws {
+    app.middleware.use(
+        FileMiddleware(publicDirectory: app.directory.publicDirectory)
+    )
+    
     let databaseName: String
     let databasePort: Int
-    // 1
+    
     if (app.environment == .testing) {
         databaseName = "vapor-test"
           if let testPort = Environment.get("DATABASE_PORT") {

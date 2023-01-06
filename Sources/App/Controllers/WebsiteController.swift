@@ -12,14 +12,13 @@ struct WebsiteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: indexHandler)
         routes.get("acronyms", ":acronymID", use: acronymHandler)
-        
+        routes.get("users", ":userID", use: userHandler)
+        routes.get("users", use: allUsersHandler)
     }
     
     func indexHandler(_ req: Request) -> EventLoopFuture<View> {
         Acronym.query(on: req.db).all().flatMap { acronyms in
-            let acronymsData = acronyms.isEmpty ? nil : acronyms
-            
-            let context = IndexContext(title: "Home page", acronyms: acronymsData)
+            let context = IndexContext(title: "Home page", acronyms: acronyms)
             return req.view.render("index", context)
         }
     }
@@ -36,6 +35,26 @@ struct WebsiteController: RouteCollection {
                     return req.view.render("acronym", context)
                 }
                 
+            }
+    }
+    
+    func userHandler(_ req: Request) -> EventLoopFuture<View> {
+        User.find(req.parameters.get("userID"), on: req.db)
+            .unwrap(or: Abort(.notFound))
+            .flatMap { user in
+                user.$acronyms.get(on: req.db).flatMap { acronyms in
+                    let context = UserContext(title: user.name, user: user, acronyms: acronyms)
+                    return req.view.render("user", context)
+                }
+            }
+    }
+    
+    func allUsersHandler(_ req: Request) -> EventLoopFuture<View> {
+        User.query(on: req.db)
+            .all()
+            .flatMap { users in
+                let context = AllUsersContext(title: "All Users", users: users)
+                return req.view.render("allUsers", context)
             }
     }
     
@@ -61,7 +80,7 @@ struct WebsiteController: RouteCollection {
 
 struct IndexContext: Encodable {
     let title: String
-    let acronyms: [Acronym]?
+    let acronyms: [Acronym]
 }
 
 struct AcronymContext: Encodable {
@@ -79,4 +98,15 @@ struct CategoryContext: Encodable {
     let title: String
     let category: Category
     let acronyms: [Acronym]
+}
+
+struct UserContext: Encodable {
+    let title: String
+    let user: User
+    let acronyms: [Acronym]
+}
+
+struct AllUsersContext: Encodable {
+    let title: String
+    let users: [User]
 }
